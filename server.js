@@ -95,8 +95,9 @@ app.post('/insertdata', function(req, res) {
       } else {
         res.send({ status: 'FAIL' });
       }
-}
+});
 
+/*
 app.get('/test', function (req, res) {
   // try to initialize the db on every request if it's not already
   // initialized.
@@ -113,7 +114,7 @@ app.get('/test', function (req, res) {
   } else {
     res.render('index.html', { pageCountMessage : null});
   }
-});
+});*/
 
 app.get('/pagecount', function (req, res) {
   // try to initialize the db on every request if it's not already
