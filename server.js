@@ -76,6 +76,27 @@ app.get('/', function (req, res) {
   }
 });
 
+app.post('/insertdata', function(req, res) {
+  if(req.body)
+  {
+      if (!db) {
+        initDb(function(err){});
+      }
+      if (db) {
+        var col = db.collection('grindbit');
+        // Create a document with grinding left and right benchmark
+        col.insert({left: req.body.left, right:req.body.right, date: Date.now()});
+
+        /*        
+        col.count(function(err, count){
+          res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails });
+        });*/
+      } else {
+        //can not insert anything
+      }
+  }
+}
+
 app.get('/test', function (req, res) {
   // try to initialize the db on every request if it's not already
   // initialized.
