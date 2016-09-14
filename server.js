@@ -77,12 +77,10 @@ app.get('/', function (req, res) {
 });
 
 app.post('/insertdata', function(req, res) {
-  if(req.body)
-  {
       if (!db) {
         initDb(function(err){});
       }
-      if (db) {
+      if (db && req.body) {
         var col = db.collection('grindbit');
         // Create a document with grinding left and right benchmark
         col.insert({left: req.body.left, right:req.body.right, date: Date.now()});
@@ -91,10 +89,12 @@ app.post('/insertdata', function(req, res) {
         col.count(function(err, count){
           res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails });
         });*/
+
+        res.send({ status: 'SUCCESS' });
+
       } else {
-        //can not insert anything
+        res.send({ status: 'FAIL' });
       }
-  }
 }
 
 app.get('/test', function (req, res) {
