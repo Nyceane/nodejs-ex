@@ -3,8 +3,10 @@ var express = require('express'),
     fs      = require('fs'),
     app     = express(),
     eps     = require('ejs'),
-    morgan  = require('morgan');
-    
+    morgan  = require('morgan'),
+    bodyParser = require('body-parser');
+
+var jsonParser = bodyParser.json();
 Object.assign=require('object-assign')
 
 app.engine('html', require('ejs').renderFile);
@@ -76,10 +78,13 @@ app.get('/', function (req, res) {
   }
 });
 
-app.post('/insertdata', function(req, res) {
+app.post('/insertdata', jsonParser, function(req, res) {
       if (!db) {
         initDb(function(err){});
       }
+      
+      if (!req.body) return res.sendStatus(400);
+
       if (db && req.body) {
         var col = db.collection('grindbit');
         // Create a document with grinding left and right benchmark
