@@ -111,15 +111,18 @@ app.get('/data', function (req, res) {
   if (db) {
     db.collection('grindbit').find().toArray(function (err, result) {
       if (err) {
+        res.set('Content-Type','application/json'); //G
         res.send('[]');
       } else if (result.length) {
+        res.set('Content-Type','application/json'); //G
         res.send(reuslt);
       } else {
+        res.set('Content-Type','application/json'); //G
         res.send('[]');
       }
-      //Close connection
     });
   } else {
+    res.set('Content-Type','application/json'); //G
     res.send('[]');
   }
 });
