@@ -109,7 +109,16 @@ app.get('/data', function (req, res) {
     initDb(function(err){});
   }
   if (db) {
-    res.send(db.collection('grindbit').find());
+    db.collection('grindbit').find().toArray(function (err, result) {
+      if (err) {
+        res.send('[]');
+      } else if (result.length) {
+        res.send(reuslt);
+      } else {
+        res.send('[]');
+      }
+      //Close connection
+    });
   } else {
     res.send('[]');
   }
