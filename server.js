@@ -115,7 +115,7 @@ app.get('/data', function (req, res) {
         res.json('[]');
       } else if (result.length) {
         res.set('Content-Type','application/json'); //G
-        res.json(reuslt);
+        res.json(result);
       } else {
         res.set('Content-Type','application/json'); //G
         res.json('[]');
